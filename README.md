@@ -23,6 +23,6 @@ top-level of this repository.
     mv reveal.js-master reveal.js
 
     pandoc -s --mathjax -i -t revealjs slides.md -o slides_noninlined.html -V revealjs-url=./reveal.js
-    inliner slides_noninlined.html > slides.html
+    inliner -m slides_noninlined.html > slides.html
 
 This should result in a `slides.html` that you can view in a web browser.
