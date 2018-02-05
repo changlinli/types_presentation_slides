@@ -6,7 +6,8 @@ slides for my presentation on "Guidelines for Correctness Through Types".
 ## Building the slides
 
 A pre-built version of this markdown file is available in the releases
-directory.
+directory (e.g.
+[this](https://github.com/changlinli/types_presentation_slides/releases/download/v0.1.1/slides.html)).
 
 In order to generate the HTML yourself, you'll need to download
 [https://revealjs.com/](https://revealjs.com/) and have
