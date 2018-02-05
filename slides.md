@@ -1,4 +1,4 @@
-% Guidelines for Correctness Through Types (without fanciness)
+% Correctness Through Types
 % Changlin Li
 
 ## Assumptions For This Talk
