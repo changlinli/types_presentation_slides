@@ -1,5 +1,6 @@
 % Moving Beyond Defensive Programming
 % Changlin Li (mail@changlinli.com)
+% Bridgewater Associates
 
 ## What this talk is about
 
@@ -74,21 +75,17 @@ readFromUserInput
 - Constrain ways of marking that they've been performed
 - Provide escape hatch to remove mark
 
-## Implementation via value classes
+## Implementation via wrapper classes
 
 ```scala
-// This isn't private in the way you'd expect
-// final case class SanitizedString private (
-//   underlying: String
-// )
 final class SanitizedString private (
   val underlying: String
 ) extends AnyVal
 
-object SanizitedString {
+object SanitizedString {
   def sanitizeString(str: String): SanitizedString = {
     // ...
-    new SanizitedString(...)
+    new SanitizedString(...)
     // ...
   }
 }
@@ -124,7 +121,7 @@ upperCase : String => UpperCaseString
 ```scala
 def validateItem(item: SomeType): Unit = {
   if (itemIsNotValid(item)) {
-    throw new Exception("This is now valid")
+    throw new Exception("This is invalid")
   } else {
     ()
   }
@@ -222,12 +219,23 @@ readFromUserInput
 
 ## What have we gained?
 
++ Remove redundant checks
 <!-- if a piece of code gives me back a `SanitizedString` or a `class` holds a
 `SanitizedString` field I'm pretty sure I can use it in the downstream parts of
 my data processing pipeline without fear -->
 + Re-use other code with less fear
+<!--Might not hit certain edge cases right away until you get to prod-->
++ Turn runtime errors into compile errors
 
-## Additional techniques and references
+## Conclusion
+
+- Simple usage of types as labels of pre and post-conditions can ensure the
+  integrity of your data processing pipeline through refactors and additions of
+  new features
+- Move institutional knowledge of what checks need to be performed to the type
+  system
+
+## Addendum
 
 - Smart constructors (variation of factories)
 - `Tagged` and opaque types
@@ -237,14 +245,6 @@ my data processing pipeline without fear -->
 - Bill Venners' `scalactic` library
 - _But you don't NEED to use these!_
 - Talk to me afterwards/email me if you want to know more about these
-
-## Conclusion
-
-- Simple usage of types as labels of pre and post-conditions can ensure the
-  integrity of your data processing pipeline through refactors and additions of
-  new features
-- Move institutional knowledge of what checks need to be performed to the type
-  system
 
 ## Questions?
 
