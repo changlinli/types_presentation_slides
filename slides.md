@@ -14,15 +14,12 @@ tries to solve, but better
 
 ## What does it mean to be correct?
 
-- Make sure the ordering of data processing steps is correct
-- Make sure all necessary steps are included
-- Make sure no extraneous steps are included
-- Make sure that all edge cases are handled
+- Data processing steps have pre and post-conditions
+- Make sure that combinations of these steps preserve these conditions
 
 ## Central Thesis
 
-- Pre and post conditions are an important tool in thinking about correctness
-- Types can serve as machine-checked labels for conditions
+- Types can serve as machine-checked labels for pre and post-conditions
 - There are some rules of thumb that ensure you're fully utilizing types to
   label conditions
 
@@ -99,6 +96,19 @@ object SanitizedString {
 - `Option` and `Either[E, _]` over exceptions
 - But prefer stricter source type over `Option` and `Either`
 
+## Functions should handle their entire source type
+
+```scala
+generateDBRecord : 
+  String => DBRecord 
+
+generateDBRecord : 
+  String => Either[InvalidString, DBRecord]
+
+generateDBRecord : 
+  ProperlyCapitalizedString => DBRecord
+```
+
 ## Functions should occupy their entire target type
 
 ```scala
@@ -115,67 +125,6 @@ upperCase : String => UpperCaseString
 
 - :( `f : String => String`
 - :) `f : String => AllCapitalsString`
-
-## Think hard about () for validation
-
-```scala
-def validateItem(item: SomeType): Unit = {
-  if (itemIsNotValid(item)) {
-    throw new Exception("This is invalid")
-  } else {
-    ()
-  }
-}
-```
-
-- `Option[Unit]`
-- `Either[Something, Unit]`
-
-## Think hard about () for validation
-
-```scala
-val result = {
-  validateItemWithCheck0(item)
-  validateItemWithCheck1(item)
-  doActualThingWithItem(item)
-}
-
-for {
-  _ <- validateItemWithCheck0(item)
-  _ <- validateItemWithCheck1(item)
-  result <- doActualThingWithItem(item)
-} yield result
-```
-
-## Bad Functions
-
-```scala
-properlyCapitalizeString : 
-  String => String
-
-generateDBRecord : 
-  String => DBRecord 
-```
-
-## Okay Functions
-
-```scala
-properlyCapitalizeString : 
-  String => String
-
-generateDBRecord : 
-  String => Either[InvalidString, DBRecord]
-```
-
-## Good Functions
-
-```scala
-properlyCapitalizeString : 
-  SanitizedString => ProperlyCapitalizedString
-
-generateDBRecord : 
-  ProperlyCapitalizedString => DBRecord
-```
 
 ## Example revisited
 
@@ -256,3 +205,34 @@ voice heard/way to let me sneak in content past the 15 min mark):
 - When should you NOT use these techniques?
 - This isn't a panacea, what classes of errors aren't covered by these
   techniques?
+
+## Think hard about () for validation
+
+```scala
+def validateItem(item: SomeType): Unit = {
+  if (itemIsNotValid(item)) {
+    throw new Exception("This is invalid")
+  } else {
+    ()
+  }
+}
+```
+
+- `Option[Unit]`
+- `Either[Something, Unit]`
+
+## Think hard about () for validation
+
+```scala
+val result = {
+  validateItemWithCheck0(item)
+  validateItemWithCheck1(item)
+  doActualThingWithItem(item)
+}
+
+for {
+  _ <- validateItemWithCheck0(item)
+  _ <- validateItemWithCheck1(item)
+  result <- doActualThingWithItem(item)
+} yield result
+```
