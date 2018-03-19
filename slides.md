@@ -121,7 +121,7 @@ upperCase : String => UpperCaseString
 - This captures post-conditions
 - A.k.a. "surjectivity" or "onto"
 
-## Frown on `f: A => A`
+## Think hard about `f: A => A`
 
 - :( `f : String => String`
 - :) `f : String => AllCapitalsString`
