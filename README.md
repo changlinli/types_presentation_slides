@@ -15,8 +15,10 @@ directory (e.g.
 In order to generate the HTML yourself, you'll need to download
 [https://revealjs.com/](https://revealjs.com/) and have
 [pandoc](https://pandoc.org/) and
-[inliner](https://www.npmjs.com/package/inliner) installed as well (the latter
-is for inlining all JS and CSS into a single HTML file).
+[inliner](https://www.npmjs.com/package/inliner) installed as well. The latter
+is for inlining all JS and CSS into a single HTML file so that you don't need
+any web connection to view the slides. If you don't require that, you can leave
+out the `inliner` depedency and command.
 
 Assuming you have pandoc and inliner, you can run the following from the
 top-level of this repository.
