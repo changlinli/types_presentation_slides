@@ -1,13 +1,16 @@
-# Guidelines for Correctness Through Types (Accompanying Slides)
+# Moving Beyond Defensive Programming (Accompanying Slides)
 
 This repository contains a markdown file (`slides.md`) that contains all the
-slides for my presentation on "Guidelines for Correctness Through Types".
+slides for my presentation on "Moving Beyond Defensive Programming".
+
+A version of this talk was given at the [2018 NE Scala
+conference](http://www.nescala.org/) (in particular v0.2.0).
 
 ## Building the slides
 
 A pre-built version of this markdown file is available in the releases
 directory (e.g.
-[this](https://github.com/changlinli/types_presentation_slides/releases/download/v0.1.1/slides.html)).
+[this](https://github.com/changlinli/types_presentation_slides/releases/download/v0.2.0/slides.html)).
 
 In order to generate the HTML yourself, you'll need to download
 [https://revealjs.com/](https://revealjs.com/) and have
