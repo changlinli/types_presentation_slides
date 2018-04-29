@@ -4,7 +4,8 @@ This repository contains a markdown file (`slides.md`) that contains all the
 slides for my presentation on "Moving Beyond Defensive Programming".
 
 A version of this talk was given at the [2018 NE Scala
-conference](http://www.nescala.org/) (in particular v0.2.0).
+conference](http://www.nescala.org/) (in particular v0.2.0). The video is
+[here](https://www.youtube.com/watch?v=Csj3lzsr0_I).
 
 ## Building the slides
 
